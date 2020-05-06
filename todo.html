@@ -21,6 +21,8 @@
         TODO
       </a>
     </div>
+  </nav>
+
   <section class="section">
     <div class="container">
       <div class="field is-grouped">
@@ -59,20 +61,31 @@
     return false;
   }
 
+  function remove() {
+    var id = this.getAttribute('id');
+    var todos = get_todos();
+    todos.splice(id, 1);
+    localStorage.setItem('todo', JSON.stringify(todos));
+
+    show();
+
+    return false;
+  }
+
   function show() {
     var todos = get_todos();
 
     var html = '':
     for(var i=0; i<todos.length; i++) {
-        html += '<a class="panel-block"><span class="panel-icon remove" id="' + i + '"><i class="fas fa-trash-alt" aria-hidden="true"></i></span>' + todo[i] + '</a>';
+        html += '<a class="panel-block"><span class="panel-icon remove" id="' + i + '"><i class="fas fa-trash-alt" aria-hidden="true"></i></span>' + todos[i] + '</a>';
     };
     html += '';
 
     document.getElementById('todos').innerHTML = html;
     document.getElementById('task').value="";
 
-    var buttons = document.getElementByClassname('remove');
-    for (var i=0; i< buttons.length; i++) {
+    var buttons = document.getElementByClassName('remove');
+    for (var i=0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', remove);
     };
   }
@@ -82,3 +95,4 @@
     </script>
 
 </body>
+</html>
